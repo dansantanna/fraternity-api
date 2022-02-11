@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky install",
-    "dev": "nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts",
+    "start": "ts-node src/app.ts",
+    "dev": "nodemon --watch 'src/' --exec \"ts-node src/app.ts\" -e ts",
     "lint": "eslint src/* --ext .ts --max-warnings 0",
     "build": "tsc"
   },
