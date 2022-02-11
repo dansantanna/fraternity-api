@@ -20,7 +20,7 @@ route.get('/', (req: Request, res: Response) => {
 
 app.use(route);
 
-const PORT = 7000;
+const PORT = 7001;
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
