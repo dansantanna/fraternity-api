@@ -15,12 +15,12 @@ app.use(morgan('dev'));
 app.use(cors());
 
 route.get('/', (req: Request, res: Response) => {
-  res.json({ message: 'Hello World with Typescript' });
+  res.json({ message: 'Hello Fraternity' });
 });
 
 app.use(route);
 
-const PORT = 7001;
+const PORT = process.env.PORT || 7001;
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
