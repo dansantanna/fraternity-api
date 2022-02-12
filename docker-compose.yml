@@ -1,8 +1,10 @@
 version: '3.4'
 
 services:
-  fraternityapi:
+  fraternity-api:
     image: fraternity-api
+    volumes:
+        - ./:/app
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -10,3 +12,6 @@ services:
       NODE_ENV: production
     ports:
       - 7001:7001
+
+volumes:
+  fraternity-api:
