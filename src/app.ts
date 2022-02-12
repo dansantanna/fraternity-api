@@ -1,6 +1,14 @@
 import express, { Router, Request, Response } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import * as dotenv from 'dotenv';
+import connectDB from './config/database';
+
+// Load envs
+dotenv.config();
+
+// Connect MongoDB
+connectDB();
 
 const app = express();
 

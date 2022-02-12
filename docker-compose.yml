@@ -9,9 +9,21 @@ services:
       context: .
       dockerfile: ./Dockerfile
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
     ports:
       - 7001:7001
+  
+  mongo:
+    container_name: mongo
+    image: mongo
+    command: mongod --quiet
+    volumes: 
+      - ./data:/data/db
+    ports: 
+      - "27017:27017"
+
+
 
 volumes:
   fraternity-api:
+  mongo:
