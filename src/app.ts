@@ -28,8 +28,7 @@ route.get('/', (req: Request, res: Response) => {
 
 app.use(route);
 
-const PORT = process.env.PORT || 7001;
-
+const { PORT } = process.env;
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`server running on port ${PORT}`);
