@@ -23,7 +23,6 @@ const UserSchema = new Schema(
       ],
     },
     password: {
-      select: false,
       type: String,
       required: [true, 'Password is required'],
       set: (password: string) => {
