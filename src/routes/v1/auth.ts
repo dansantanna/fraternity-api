@@ -1,9 +1,8 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
+import { authentication } from 'controllers/auth';
 
 const router = Router();
 
-router.post('/token', (req: Request, res: Response) => {
-  res.json({ message: 'Hello Fraternity' });
-});
+router.post('/token', authentication);
 
 export default router;

@@ -2,11 +2,6 @@ import mongoose, { Schema } from 'mongoose';
 
 const UserSchema = new Schema(
   {
-    name: {
-      type: String,
-      trim: true,
-      required: true,
-    },
     email: {
       type: String,
       lowercase: true,
@@ -17,14 +12,13 @@ const UserSchema = new Schema(
     password: {
       type: String,
       required: true,
+      bcrypt: true,
     },
   },
   {
     collection: 'users',
   },
 );
-
-UserSchema.index({ createdAt: 1, updatedAt: 1 });
 
 const User = mongoose.model('User', UserSchema);
 
