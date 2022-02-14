@@ -4,7 +4,8 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import path from 'path';
 
-import connectDB from './config/database';
+import routes from 'routes';
+import connectDB from 'config/database';
 
 // Load envs
 dotenv.config();
@@ -23,6 +24,9 @@ app.use(morgan('dev'));
 
 // cors
 app.use(cors());
+
+// Routes
+app.use(routes);
 
 route.get('/', (req: Request, res: Response) => {
   res.json({ message: 'Hello Fraternity' });
