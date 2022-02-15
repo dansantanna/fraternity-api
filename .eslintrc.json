@@ -38,7 +38,7 @@
       "typescript": {},
       "node": {
         "extensions": [
-          ".ts"
+          ".ts", "*.json"
         ]
       }
     }

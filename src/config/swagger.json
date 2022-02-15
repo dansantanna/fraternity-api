@@ -1,0 +1,108 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is the API documentation..",
+        "version": "1.0.0",
+        "title": "Fraternity Api Docs",
+        "contact": {
+            "email": "danielcarlossantanna+fraternity@gmail.com"
+        }
+    },
+    "basePath": "/v1",
+    "tags": [
+        {
+            "name": "user",
+            "description": "Operations about user"
+        },
+        {
+            "name": "auth",
+            "description": "Operations about authentication"
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/user": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Create user",
+                "description": "Create a new user to log in.",
+                "operationId": "createUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User object created"
+                    },
+                    "400": {
+                        "description": "Error response"
+                    }
+                }
+            }
+        },
+        "/auth/token": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Get token",
+                "description": "Authentication user.",
+                "operationId": "authUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Credentials",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User object with token"
+                    },
+                    "401": {
+                        "description": "Error response"
+                    }
+                }
+            }
+        }
+    }
+}
