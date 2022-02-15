@@ -1,4 +1,4 @@
-import express, { Router, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
@@ -17,8 +17,6 @@ connectDB();
 
 const app = express();
 
-const route = Router();
-
 app.use(express.json());
 
 // logger
@@ -32,10 +30,6 @@ app.use(routes);
 
 // Swagger
 app.use('/api-docs', swagger.serve, swagger.setup(swaggerDoc));
-
-route.get('/', (req: Request, res: Response) => {
-  res.json({ message: 'Hello Fraternity' });
-});
 
 const { PORT } = process.env;
 app.listen(PORT, () => {
