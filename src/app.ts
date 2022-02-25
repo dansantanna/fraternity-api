@@ -4,11 +4,13 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import path from 'path';
 import swagger from 'swagger-ui-express';
-import { ApolloServer, gql } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 
 import routes from 'routes';
 import connectDB from 'config/database';
 import swaggerDoc from 'config/swagger.json';
+import auth from 'middlewares/auth';
+import schema from './schemas';
 
 // Load envs
 dotenv.config();
@@ -29,26 +31,17 @@ app.use(cors());
 // Routes
 app.use(routes);
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-// Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world!',
-  },
-};
 const graphqlPath = '/graphql';
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ schema });
+
 server.start().then(() => {
   server.applyMiddleware({ app, path: graphqlPath });
 });
 
 // Swagger
 app.use('/api-docs', swagger.serve, swagger.setup(swaggerDoc));
+
+if (process.env.NODE_ENV !== 'development') app.use(graphqlPath, auth());
 
 app.use((req: Request, res: Response, next) => {
   if (req.originalUrl !== graphqlPath) {
