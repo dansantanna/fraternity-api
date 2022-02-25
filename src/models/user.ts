@@ -1,9 +1,10 @@
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
+import { composeMongoose } from 'graphql-compose-mongoose';
 
 const modelName = 'User';
 
-const UserSchema = new Schema(
+export const UserSchema = new Schema(
   {
     email: {
       type: String,
@@ -44,5 +45,6 @@ UserSchema.methods.comparePassword = function comparePassword(
 };
 
 const User = model(modelName, UserSchema);
+export const UserTC = composeMongoose(User, { removeFields: ['password'] });
 
 export default User;
