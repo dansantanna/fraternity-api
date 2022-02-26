@@ -6,6 +6,11 @@ const modelName = 'User';
 
 export const UserSchema = new Schema(
   {
+    name: {
+      type: String,
+      required: [true, 'Name is required'],
+      trim: true,
+    },
     email: {
       type: String,
       lowercase: true,
