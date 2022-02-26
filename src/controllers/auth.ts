@@ -6,9 +6,9 @@ import User from 'models/user';
 
 // eslint-disable-next-line import/prefer-default-export
 export const authentication = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email: username });
+    const user = await User.findOne({ email });
 
     if (!(await user.comparePassword(password))) throw Error();
 
