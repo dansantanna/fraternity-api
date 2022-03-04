@@ -2,8 +2,9 @@
     "bracketSpacing": true,
     "printWidth": 80,
     "singleQuote": true,
-    "parser": "flow",
+    "parser": "typescript",
     "tabWidth": 2,
     "trailingComma": "all",
-    "useTabs": false
+    "useTabs": false,
+    "endOfLine": "auto"
 }

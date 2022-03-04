@@ -46,7 +46,7 @@ if (process.env.NODE_ENV !== 'development') app.use(graphqlPath, auth());
 app.use((req: Request, res: Response, next) => {
   if (req.originalUrl !== graphqlPath) {
     if (req.headers.accept?.includes('text/html'))
-      res.status(404).sendFile(path.join(`${__dirname}/public/404.html`));
+      res.status(404).sendFile(path.join(`${__dirname}/templates/404.html`));
     else res.status(404).send({ status: 'error', message: 'Page not found' });
   } else {
     next();
