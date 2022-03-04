@@ -70,6 +70,43 @@
                 }
             }
         },
+        "/user/change-password": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Change user password",
+                "description": "Change user password",
+                "operationId": "changePasswordUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success message"
+                    },
+                    "400": {
+                        "description": "Error response"
+                    }
+                }
+            }
+        },
         "/auth/token": {
             "post": {
                 "tags": [
@@ -106,6 +143,40 @@
                     },
                     "401": {
                         "description": "Error response"
+                    }
+                }
+            }
+        },
+        "/auth/recovery-password": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Recovery Password",
+                "description": "Send email to recovery password.",
+                "operationId": "authRecoveryPassword",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Send email",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message"
                     }
                 }
             }

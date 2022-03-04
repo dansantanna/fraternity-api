@@ -4,6 +4,14 @@ import { composeMongoose } from 'graphql-compose-mongoose';
 
 const modelName = 'User';
 
+export interface IUser {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 export const UserSchema = new Schema(
   {
     firstName: {
