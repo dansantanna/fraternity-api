@@ -1,10 +1,8 @@
 import { Router } from 'express';
-import { register, changePassword } from 'controllers/user';
-import auth from 'middlewares/auth';
+import { register } from 'controllers/user';
 
 const router = Router();
 
 router.post('/', register);
-router.post('/change-password', auth(), changePassword);
 
 export default router;
