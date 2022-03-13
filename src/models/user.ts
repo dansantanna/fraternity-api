@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
-import bcrypt from 'bcrypt';
 import { composeMongoose } from 'graphql-compose-mongoose';
+import { encrypt, compare } from 'config/crypt';
 
 const modelName = 'User';
 
@@ -45,8 +45,7 @@ export const UserSchema = new Schema(
       type: String,
       required: [true, 'Password is required'],
       set: (password: string) => {
-        const salt = bcrypt.genSaltSync(10);
-        return bcrypt.hashSync(password, salt);
+        return encrypt(password);
       },
     },
   },
@@ -59,10 +58,12 @@ export const UserSchema = new Schema(
 UserSchema.methods.comparePassword = function comparePassword(
   candidatePassword: string,
 ): Promise<boolean> {
-  return bcrypt.compare(candidatePassword, this.password);
+  return compare(candidatePassword, this.password);
 };
 
 const User = model(modelName, UserSchema);
-export const UserTC = composeMongoose(User, { removeFields: ['password'] });
+export const UserTC = composeMongoose(User, {
+  removeFields: ['password', 'token_password'],
+});
 
 export default User;

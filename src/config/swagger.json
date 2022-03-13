@@ -70,14 +70,14 @@
                 }
             }
         },
-        "/user/change-password": {
+        "/auth/new-password": {
             "post": {
                 "tags": [
-                    "user"
+                    "auth"
                 ],
                 "summary": "Change user password",
                 "description": "Change user password",
-                "operationId": "changePasswordUser",
+                "operationId": "changePasswordAuth",
                 "produces": [
                     "application/json"
                 ],
@@ -85,7 +85,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Created user object",
+                        "description": "New password",
                         "required": true,
                         "schema": {
                             "type": "object",
@@ -98,7 +98,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Success message"
                     },
                     "400": {

@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
 
 import { generateJwtToken } from 'config/jwt';
-import User from 'models/user';
+import User, { IUser } from 'models/user';
 import sendMail, { applyDataToTemplate } from 'config/sendMail';
 
-// eslint-disable-next-line import/prefer-default-export
 export const authentication = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   try {
@@ -27,9 +26,7 @@ export const recoveryPassword = async (req: Request, res: Response) => {
   try {
     const user = await User.findOne({ email });
     const token = generateJwtToken(user._id);
-    const link = `${req.protocol}://${req.get(
-      'host',
-    )}/change-password/${token}`;
+    const link = `${process.env.CLIENT_URL}/change-password/${token}`;
     const content = await applyDataToTemplate('recovery-password', {
       ...user.toObject(),
       link,
@@ -43,4 +40,17 @@ export const recoveryPassword = async (req: Request, res: Response) => {
     status: 'succes',
     message: 'request processed',
   });
+};
+
+export const newPassword = async (req: Request, res: Response) => {
+  try {
+    const { password } = req.body;
+    const user = req.user as IUser;
+    if (!password) throw new Error('Password is required');
+    if (!user?._id) throw new Error('User is required');
+    await User.findByIdAndUpdate(user?._id, { password });
+    res.send({ status: 'success', message: 'Password changed' });
+  } catch (error) {
+    res.status(400).send({ status: 'error', error });
+  }
 };
