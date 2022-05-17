@@ -24,6 +24,11 @@ export const UserSchema = new Schema(
       required: [true, 'Last name is required'],
       trim: true,
     },
+    photo: { type: String },
+    biography: { type: String },
+    experiences: [{ type: Schema.Types.ObjectId, ref: 'Experience' }],
+    academics: [{ type: Schema.Types.ObjectId, ref: 'Academy' }],
+    address: { type: Schema.Types.ObjectId, ref: 'Address' },
     email: {
       type: String,
       lowercase: true,
