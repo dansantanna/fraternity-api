@@ -1,17 +1,13 @@
-import { Router, Request, Response } from 'express';
-import {
-  authentication,
-  recoveryPassword,
-  newPassword,
-} from 'controllers/auth';
-import auth from 'middlewares/auth';
+import { Router, Response } from 'express';
+import * as auth from 'controllers/auth';
+import authMiddleware from 'middlewares/auth';
 
 const router = Router();
 
-router.post('/token', authentication);
-router.post('/recovery-password', recoveryPassword);
-router.post('/new-password', auth(), newPassword);
-router.all('/validate-token', auth(), (req: Request, res: Response) => {
+router.post('/token', auth.authentication);
+router.post('/recovery-password', auth.recoveryPassword);
+router.post('/new-password', authMiddleware(), auth.newPassword);
+router.all('/validate-token', authMiddleware(), (_, res: Response) => {
   res.send({ status: 'succes', message: 'Token valid' });
 });
 
