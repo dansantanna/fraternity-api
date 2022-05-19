@@ -4,8 +4,11 @@ import * as address from 'controllers/address';
 import * as experience from 'controllers/experience';
 import * as academy from 'controllers/academy';
 import * as mentorship from 'controllers/mentorship';
+import auth from 'middlewares/auth';
 
 const router = Router();
+
+router.use('/', auth());
 
 router.get('/', profile.currentProfile);
 router.get('/:id', profile.getById);

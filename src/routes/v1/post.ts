@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import * as post from 'controllers/post';
 import * as comment from 'controllers/comment';
+import auth from 'middlewares/auth';
 
 const router = Router();
+router.use('/', auth());
 
 router.get('/', post.getPosts);
 router.get('/:id', post.getPost);
