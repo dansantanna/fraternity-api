@@ -28,7 +28,13 @@ export const UserSchema = new Schema(
     biography: { type: String },
     experiences: [{ type: Schema.Types.ObjectId, ref: 'Experience' }],
     academics: [{ type: Schema.Types.ObjectId, ref: 'Academy' }],
-    address: { type: Schema.Types.ObjectId, ref: 'Address' },
+    address: {
+      street: String,
+      city: String,
+      zipcode: String,
+      country: String,
+      state: String,
+    },
     email: {
       type: String,
       lowercase: true,
@@ -68,7 +74,7 @@ UserSchema.methods.comparePassword = function comparePassword(
 
 const User = model(modelName, UserSchema);
 export const UserTC = composeMongoose(User, {
-  removeFields: ['password', 'token_password'],
+  removeFields: ['password'],
 });
 
 export default User;
