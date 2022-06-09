@@ -5,6 +5,8 @@ import * as dotenv from 'dotenv';
 import path from 'path';
 import swagger from 'swagger-ui-express';
 import { ApolloServer } from 'apollo-server-express';
+import http from 'http';
+import * as socketio from 'socket.io';
 
 import routes from 'routes';
 import connectDB from 'config/database';
@@ -54,7 +56,29 @@ app.use((req: Request, res: Response, next) => {
 });
 
 const { PORT } = process.env;
-app.listen(PORT, () => {
+const serverApi = http.createServer(app);
+const io = new socketio.Server(serverApi, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+  },
+});
+io.on('connection', (socket) => {
+  socket.on('send-message', ({ to, content }) => {
+    // eslint-disable-next-line no-console
+    console.log('emmit', { to, content });
+
+    if (content.trim()) {
+      io.emit(to, content?.trim());
+    }
+  });
+  socket.on('disconnect', () => {
+    // eslint-disable-next-line no-console
+    console.log('User disconnected');
+  });
+});
+
+serverApi.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`🚀 Server running on port ${PORT}`);
 });

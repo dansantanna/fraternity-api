@@ -25,6 +25,7 @@ export const UserSchema = new Schema(
       trim: true,
     },
     photo: { type: String },
+    role: { type: String },
     biography: { type: String },
     experiences: [{ type: Schema.Types.ObjectId, ref: 'Experience' }],
     academics: [{ type: Schema.Types.ObjectId, ref: 'Academy' }],

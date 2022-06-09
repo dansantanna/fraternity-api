@@ -12,7 +12,13 @@ export const authentication = async (req: Request, res: Response) => {
     if (!(await user.comparePassword(password))) throw Error();
 
     const token = generateJwtToken(user._id);
-    res.status(200).json({ token, _id: user._id });
+    res.status(200).json({
+      token,
+      _id: user._id,
+      name: `${user?.firstName} ${user.lastName}`,
+      photo: user.photo,
+      role: user.role,
+    });
   } catch (error) {
     res.status(401).json({
       status: 'error',
