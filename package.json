@@ -8,7 +8,7 @@
     "start": "ts-node -r tsconfig-paths/register src/app.ts",
     "dev": "nodemon --watch 'src/' --exec \"yarn start\" -e ts",
     "lint": "eslint src/* --ext .ts --max-warnings 0 --no-error-on-unmatched-pattern",
-    "build": "ts-node -r tsconfig-paths/register src/app.ts"
+    "build": "tsc"
   },
   "engines": {
     "yarn": "1.x",
